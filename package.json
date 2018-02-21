@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --reporter mochawesome | nyc --reporter=html mocha"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,11 @@
   },
   "homepage": "https://github.com/officialjedsada/co-work-api#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "mocha": "^5.0.1"
+  },
+  "devDependencies": {
+    "mochawesome": "^3.0.2",
+    "nyc": "^11.4.1"
   }
 }
