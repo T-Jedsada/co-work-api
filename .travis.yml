@@ -2,7 +2,7 @@ language: node_js
 notifications:
     slack:
       rooms:
-        - secure: 20scoopscnx:MHXX5rImwvTFSMK0JiJfa7ur
+        - 20scoopscnx:MHXX5rImwvTFSMK0JiJfa7ur
       on_start: always
 node_js:
  - "8.9.4"
