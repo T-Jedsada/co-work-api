@@ -2,7 +2,6 @@ require('dotenv').config();
 var mongojs = require('mongojs');
 var bcrypt = require('bcrypt');
 var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE]);
-//var database = mongojs('mongodb://root:root@ds245228.mlab.com:45228/cowork', ['users']);
 
 /* List data in database */
 exports.index = function(req, res, next) {
