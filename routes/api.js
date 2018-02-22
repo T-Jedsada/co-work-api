@@ -3,8 +3,15 @@ var mongojs = require('mongojs');
 var router = express.Router();
 var database = mongojs('mongodb://root:root@ds245228.mlab.com:45228/cowork', ['users']);
 
+
+
 var register_controller = require('../app/controllers/register/registerController');
-//router.get('/register', register_controller.index());
+router.get('/register', register_controller.list);
+
+/* List data in database */
+router.get('/', function(req, res, next) {
+    res.register_controller.list();
+});
 
 /* List data in database */
 router.get('/', function(req, res, next) {
