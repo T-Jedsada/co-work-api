@@ -8,10 +8,6 @@ var database = mongojs('mongodb://root:root@ds245228.mlab.com:45228/cowork', ['u
 var register_controller = require('../app/controllers/register/registerController');
 router.get('/register', register_controller.list);
 
-/* List data in database */
-router.get('/', function(req, res, next) {
-    res.register_controller.list();
-});
 
 /* List data in database */
 router.get('/', function(req, res, next) {
