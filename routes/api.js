@@ -3,6 +3,9 @@ var mongojs = require('mongojs');
 var router = express.Router();
 var database = mongojs('mongodb://root:root@ds245228.mlab.com:45228/cowork', ['users']);
 
+var register_controller = require('../app/controllers/register/registerController');
+//router.get('/register', register_controller.index());
+
 /* List data in database */
 router.get('/', function(req, res, next) {
     database.users.find(function(err, users){
@@ -20,14 +23,18 @@ router.post('/', function(req, res, next){
     if(!user.name || !user.email || !user.password || !user.image){
         res.status(400);
         res.json({
-            "error": "Bad Data"
+            "success": "fail",
+            "massage": "Eroor 400"
         });
     } else {
         database.users.save(user, function(err, user){
             if(err){
                 res.send(err);
             }
-            res.json(user);
+            res.json({
+                "success": "true",
+                "data": user
+            });
         });
     }
 });
