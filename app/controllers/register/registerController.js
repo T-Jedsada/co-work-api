@@ -1,50 +1,40 @@
 require('dotenv').config();
 var mongojs = require('mongojs');
 var bcrypt = require('bcrypt');
+var base_response = require('../baseController');
 var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE]);
 
-/* add feature */
 /* List data in database */
 exports.index = function(req, res, next) {
     database.users.find(function(err, users){
         if(err){
-            res.send(err);
+            res.json(base_response.error('Not have information'));
         }
-        res.json(users);
+        res.json(base_response.success(users));
     });
 };
 
 /* Save Register */
 exports.store = function(req, res, next) {
     var user = req.body;
-    /*  */
     if(!user.name || !user.email || !user.password || !user.image){
         res.status(400);
-        res.json({
-            "success": false,
-            "massage": "The details are not complete."
-        });
+        res.json(base_response.error('The details are not complete.'));
     }
+    /* hash password */
     bcrypt.hash(user.password, 10, function(err, hash) {
         user.password = hash;
     });
-
     /* check email in database users */
     check_email = database.users.find(user.email);
     if (check_email){
-        res.json({
-            "success": false,
-            "massage": "This email is already used."
-        });
+        res.json(base_response.error('This email is already used.'));
     }
     database.users.save(user, function(err, user){
         if(err){
-            res.send(err);
+            res.json(base_response.error('Error : Can not save register'));
         }
-        res.json({
-            "success": true,
-            "data": user
-        });
+        res.json(base_response.success(user));
     });
 };
 
@@ -52,11 +42,8 @@ exports.store = function(req, res, next) {
 exports.delete = function(req, res, next) {
     database.users.remove({_id: mongojs.ObjectId(req.params.id)}, function(err, user){
         if(err){
-            res.send(err);
+            res.json('Error : Can not delete user');
         }
-        res.json({
-            "success": true,
-            "data": user
-        });
+        res.json(base_response.success(user));
     });
 };
