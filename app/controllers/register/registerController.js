@@ -20,7 +20,7 @@ exports.store = function(req, res, next) {
     if(!user.name || !user.email || !user.password || !user.image){
         res.status(400);
         res.json({
-            "success": "fail",
+            "success": false,
             "massage": "The details are not complete."
         });
     }
@@ -32,17 +32,16 @@ exports.store = function(req, res, next) {
     check_email = database.users.find(user.email);
     if (check_email){
         res.json({
-            "success": "fail",
+            "success": false,
             "massage": "This email is already used."
         });
     }
-
     database.users.save(user, function(err, user){
         if(err){
             res.send(err);
         }
         res.json({
-            "success": "true",
+            "success": true,
             "data": user
         });
     });
@@ -55,7 +54,7 @@ exports.delete = function(req, res, next) {
             res.send(err);
         }
         res.json({
-            "success": "true",
+            "success": true,
             "data": user
         });
     });
