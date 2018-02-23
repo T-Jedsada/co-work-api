@@ -3,7 +3,7 @@ var mongojs = require('mongojs');
 var bcrypt = require('bcrypt');
 var base_response = require('../baseController');
 var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE]);
-
+/*add feature*/
 /* List data in database */
 exports.index = function(req, res, next) {
     database.users.find(function(err, users){
