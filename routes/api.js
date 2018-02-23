@@ -9,7 +9,6 @@ router.post('/register', register_controller.store);
 router.delete('/register/delete/:id', register_controller.delete);
 
 /* Api for file image upload */
-router.get('/upload-image', image_controller.index);
 router.post('/upload-image',image_controller.upload);
 
 module.exports = router;

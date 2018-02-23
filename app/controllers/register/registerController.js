@@ -36,7 +36,6 @@ exports.store = function(req, res, next) {
             "massage": "This email is already used."
         });
     }
-
     database.users.save(user, function(err, user){
         if(err){
             res.send(err);

@@ -1,5 +1,5 @@
 var multer = require('multer');
-var image_profile = "public/upload/images/profile";
+var image_profile = "public/uploads/images/profile";
 
 var storage = multer.diskStorage({
     destination: function(req, file, callback) {
@@ -9,11 +9,6 @@ var storage = multer.diskStorage({
         callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
     }
 });
-
-/* get image name */
-exports.index = function(req, res, next) {
-
-};
 
 /* upload and save image name */
 exports.upload = function(req, res, next) {
@@ -25,14 +20,12 @@ exports.upload = function(req, res, next) {
                 "massage": "Something went wrong!"
             });
         }
-
         if(req.file === undefined){
             res.json({
                 success : false,
                 "massage": "Error: No File Selected!"
             });
         }
-
         res.json({
             success : true,
             "massage": "File uploaded sucessfully!"
