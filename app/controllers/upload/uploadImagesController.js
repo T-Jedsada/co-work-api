@@ -1,4 +1,5 @@
 var multer = require('multer');
+var base_response = require('../baseController');
 var image_profile = "public/uploads/images/profile";
 
 var storage = multer.diskStorage({
@@ -15,20 +16,14 @@ exports.upload = function(req, res, next) {
     var upload = multer({ storage: storage }).single('image');
     upload(req, res, function(err) {
         if (err) {
-            res.json({
-                success : false,
-                "massage": "Something went wrong!"
-            });
+            res.json(base_response.error('this error '));
         }
         if(req.file === undefined){
-            res.json({
-                success : false,
-                "massage": "Error: No File Selected!"
-            });
+            res.json(base_response.error('Error: No File Selected!'))
         }
-        res.json({
-            success : true,
-            "massage": "File uploaded sucessfully!"
-        });
+        if(!req.file.mimetype.startsWith('image')){
+            res.json(base_response.error('Error: No File Images!'));
+        }
+        res.json(base_response.success('File uploaded sucessfully!'));
     });
 };
