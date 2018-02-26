@@ -39,10 +39,12 @@ module.exports = {
         var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
         var data = {
-            from: 'Excited User <postmaster@sandboxdbeede01771b418fb0f261064025c4e8.mailgun.org>',
-            to: 'chachat_2015@hotmail.com',
+            from: 'Mail Gun <postmaster@co-work.20scoops.com>',
+            to: user.email,
             subject: 'Hello',
-            text: 'Testing some Mailgun awesomeness!'
+            html:
+            '<h2>Welco register to CO-Work</h2>'+
+            '<p>click <a href="http://localhost:8000/confirm-singup"><h3>http://localhost:8000/sing-up</h3></a></p>'
         };
 
         mailgun.messages().send(data, function (error, body) {

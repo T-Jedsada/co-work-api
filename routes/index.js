@@ -7,4 +7,8 @@ router.get('/', function(req, res, next) {
   res.send('Hallo world');
 });
 
+router.get('/confirm-singup', function(req, res, next) {
+    res.sendfile('views/index.html');
+});
+
 module.exports = router;
