@@ -17,7 +17,11 @@ module.exports = {
             subject: 'Sending Email using Node.js',
             html:
             '<h2>Welcome register to CO-Work</h2>'+
-            '<p>Click <a href="http://localhost:8000/api/register/verify/' + user._id + '">here</a> to confirm register</p>'+
+            '<form action="http://localhost:8000/api/register/verify/' + user._id + '" method="post">' +
+                '<input type="hidden" name="name" value="Jarter">'+
+                '<button type="submit">confirm register</button>'+
+            '</form>'+
+            /*'<p>Click <a href="http://localhost:8000/api/register/verify/' + user._id + '">here</a> to confirm register</p>'+*/
             '<p>Or click <a href="http://localhost:8000/api/register/verify/' + user._id + '"><h3>http://localhost:8000/api/register/verify/' + user._id + '</h3></a></p>'
         };
 
@@ -27,6 +31,22 @@ module.exports = {
             } else {
                 return 1;
             }
+        });
+    },
+    verified: function (user) {
+        var api_key = 'key-5bd6880d8dc86d171ed0ff5d41ca9324';
+        var domain = 'sandboxdbeede01771b418fb0f261064025c4e8.mailgun.org';
+        var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+
+        var data = {
+            from: 'Excited User <postmaster@sandboxdbeede01771b418fb0f261064025c4e8.mailgun.org>',
+            to: 'chachat_2015@hotmail.com',
+            subject: 'Hello',
+            text: 'Testing some Mailgun awesomeness!'
+        };
+
+        mailgun.messages().send(data, function (error, body) {
+            console.log(body);
         });
     }
 };

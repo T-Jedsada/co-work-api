@@ -27,9 +27,9 @@ exports.store = function(req, res, next) {
         user.password = hash;
     });
     /* check email in database users */
-    /*database.users.find({email: user.email}).toArray(function(err, users) {
-        if (users.email === user.email){
-            res.json(base_response.error('This email is already used.'));
+    /*database.users.find({email: user.email}, function(err, user) {
+        if (user){
+            return res.json(base_response.error('This email is already used.'));
         }
     });*/
     /* insert data to database */
