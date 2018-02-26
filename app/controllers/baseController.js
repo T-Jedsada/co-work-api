@@ -2,18 +2,18 @@ module.exports = {
     success: function(data) {
         if(data.constructor === String){
             return {
-                'type': true,
+                'success': true,
                 'massage': data
             };
         }
         return {
-            'type': true,
+            'success': true,
             'data': data
         };
     },
     error: function (massage) {
         return {
-            'type': false,
+            'success': false,
             'massage': massage
         };
     }
