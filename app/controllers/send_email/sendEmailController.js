@@ -17,7 +17,7 @@ exports.index = function(req, res, next) {
         from: send.email_from,
         to: send.email_to,
         subject: 'Sending Email using Node.js',
-        text: 'That was easy! dfgdfg0dfgf22222gjgfdhhjhg'
+        text: '!'
     };
 
     transporter.sendMail(mailOptions, function(error, info){
@@ -25,32 +25,6 @@ exports.index = function(req, res, next) {
             res.json(base_response.error('Error: Have something wrong!'))
         } else {
             res.json(base_response.success('Send email successfully'))
-        }
-    });
-};
-
-exports.register =  function(req, res, next) {
-    var send = req.body;
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.EMAIL_SEND_TO_USERS_NAME,
-            pass: process.env.EMAIL_SEND_TO_USERS_PASSWORD
-        }
-    });
-
-    var mailOptions = {
-        from: process.env.EMAIL_SEND_TO_USERS_NAME,
-        to: send.email,
-        subject: 'Sending Email using Node.js',
-        text: 'That was easy!'
-    };
-
-    transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-            return 0;
-        } else {
-            return 1;
         }
     });
 };

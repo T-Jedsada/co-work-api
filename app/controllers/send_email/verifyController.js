@@ -15,7 +15,10 @@ module.exports = {
             from: process.env.EMAIL_SEND_TO_USERS_NAME,
             to: user.email,
             subject: 'Sending Email using Node.js',
-            html: 'Click <a href="localhost:8000/register/verify/' + user._id + '">here</a> to confirm your register'
+            html:
+            '<h2>Welcome register to CO-Work</h2>'+
+            '<p>Click <a href="http://localhost:8000/api/register/verify/' + user._id + '">here</a> to confirm register</p>'+
+            '<p>Or click <a href="http://localhost:8000/api/register/verify/' + user._id + '"><h3>http://localhost:8000/api/register/verify/' + user._id + '</h3></a></p>'
         };
 
         transporter.sendMail(mailOptions, function(error, info){
