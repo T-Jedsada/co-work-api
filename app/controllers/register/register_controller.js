@@ -24,35 +24,33 @@ exports.index = function(req, res, next) {
 exports.store = function(req, res, next) {
 
     var user = req.body;
-    //var image = res.file.image.originalname;
-    //res.send(user.email);
-    var image = upload_image.upload(req, res);
-    res.send(image);
-    /*user.status = false;
-    user.image = image;*/
+    var image = upload_image.upload(req, req.files);
+    user.status = false;
+    user.image = image;
 
-    /*if(!user.name || !user.email || !user.password || !user.image){
+    if(!user.name || !user.email || !user.password || !user.image){
         res.status(400);
         return res.json(base_response.error('The details are not complete.'));
     }
-    /!* hash password *!/
+    /* hash password */
     bcrypt.hash(user.password, 10, function (err, hash) {
         user.password = hash;
     });
-    /!* check email in database users *!/
-    /!*database.users.find({email: user.email}, function(err, user) {
+    /* check email in database users */
+    /*database.users.find({email: user.email}, function(err, user) {
         if (user){
             return res.json(base_response.error('This email is already used.'));
         }
-    });*!/
-    /!* insert data to database *!/
+        return res.end();
+    });*/
+    /* insert data to database */
     database.users.save(user, function (err, user) {
         if (err) {
             return res.json(base_response.error('Can not save register'));
         }
         send_email.verifies(user);
         return res.json(base_response.success(user));
-    });*/
+    });
 };
 
 /* Delete user register */
@@ -71,7 +69,6 @@ exports.delete_all = function(req, res, next) {
         if(err){
             return res.json('Can not delete user');
         }
-
         return res.json(base_response.success(user));
     });
 };
