@@ -18,7 +18,7 @@ exports.index = function(req, res, next) {
 /* Save Register */
 exports.store = function(req, res, next) {
     var user = req.body;
-    //user.image =
+    user.status = false;
     if(!user.name || !user.email || !user.password || !user.image){
         res.status(400);
         return res.json(base_response.error('The details are not complete.'));
@@ -38,7 +38,7 @@ exports.store = function(req, res, next) {
         if (err) {
             return res.json(base_response.error('Can not save register'));
         }
-        send_email.verified(user);
+        send_email.verifies(user);
         return res.json(base_response.success(user));
     });
 };
