@@ -1,8 +1,8 @@
 require('dotenv').config();
 var mongojs = require('mongojs');
 var bcrypt = require('bcrypt');
-var base_response = require('../baseController');
-var send_email = require('../send_email/verifyController');
+var base_response = require('../base_controller');
+var send_email = require('../send_email/verify_controller');
 var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE]);
 
 /* List data in database */
