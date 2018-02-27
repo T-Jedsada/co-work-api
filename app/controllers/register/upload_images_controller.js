@@ -22,14 +22,15 @@ var storage = multerS3({
 });
 
 /* upload and save image name */
-exports.uploaded = function (req, res, next) {
-    var upload = multer({storage: storage}).array('image', 1);
-    upload(req, res, function (err) {
-        if (err) {
-            res.json(base_response.error('Error: Have something wrong!'));
-        }
-        res.send(process.env.AWS_3S_AMAZONAWS + '/' + process.env.AWS_BUCKET + '/' +file_name);
-    });
+module.exports = {
+    upload: function(req, res) {
+        var upload = multer({storage: storage}).array('image', 1);
+        upload(req, res, function (err) {
+            if (err) {
+                res.json(base_response.error('Error: Have something wrong!'));
+            }
+        });
+        return process.env.AWS_3S_AMAZONAWS + '/' + process.env.AWS_BUCKET + '/' + file_name;
+    }
 };
-
 
