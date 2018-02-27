@@ -14,7 +14,7 @@ module.exports = {
     error: function (massage) {
         return {
             'success': false,
-            'massage': massage
+            'massage': 'Error: ' + massage
         };
     }
 };

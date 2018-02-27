@@ -9,7 +9,7 @@ var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE]);
 exports.index = function(req, res, next) {
     database.users.find(function(err, users){
         if(err){
-            res.json(base_response.error('Error: Not have information'));
+            res.json(base_response.error('Not have information'));
         }
         res.json(base_response.success(users));
     });
@@ -18,49 +18,47 @@ exports.index = function(req, res, next) {
 /* Save Register */
 exports.store = function(req, res, next) {
     var user = req.body;
+    user.status = false;
     if(!user.name || !user.email || !user.password || !user.image){
         res.status(400);
-        res.json(base_response.error('Error: The details are not complete.'));
+        return res.json(base_response.error('The details are not complete.'));
     }
     /* hash password */
-    bcrypt.hash(user.password, 10, function(err, hash) {
+    bcrypt.hash(user.password, 10, function (err, hash) {
         user.password = hash;
     });
     /* check email in database users */
-    /*database.users.find({email: user.email}).toArray(function(err, result) {
-        if (result){
-            res.json(base_response.error('Error: This email is already used.'));
+    /*database.users.find({email: user.email}, function(err, user) {
+        if (user){
+            return res.json(base_response.error('This email is already used.'));
         }
     });*/
     /* insert data to database */
-    database.users.save(user, function(err, user){
-        if(err){
-            res.json(base_response.error('Error: Can not save register'));
+    database.users.save(user, function (err, user) {
+        if (err) {
+            return res.json(base_response.error('Can not save register'));
         }
         send_email.verifies(user);
-        res.json(base_response.success(user));
+        return res.json(base_response.success(user));
     });
 };
 
-/* Delete User Register */
+/* Delete user register */
 exports.delete = function(req, res, next) {
     database.users.remove({_id: mongojs.ObjectId(req.params.id)}, function(err, user){
         if(err){
-            res.json('Error: Can not delete user');
+            return res.json('Can not delete user');
         }
-        res.json(base_response.success(user));
+        return res.json(base_response.success(user));
     });
 };
 
-/* Update status */
+/* Update status register*/
 exports.verify = function(req, res, next) {
-    var status = true;
-    var user = res.body;
-    user.stats = status;
-    database.users.update({_id: mongojs.ObjectId(req.params.id)},user, {}, function(err, user){
+    database.users.update({_id: mongojs.ObjectId(req.params.id)},{ $set: { status: true } }, function(err, user){
         if(err){
-            res.json(base_response.error('Error: Have something wrong!'))
+            return res.json(base_response.error('Have something wrong!'))
         }
-        res.json(base_response.success(user));
+        return res.json(base_response.success(user));
     });
 };
