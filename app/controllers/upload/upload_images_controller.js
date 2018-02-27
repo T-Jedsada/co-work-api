@@ -1,6 +1,6 @@
 var multer = require('multer');
 var image_profile = "public/uploads/images/profile";
-var base_response = require('../baseController');
+var base_response = require('../base_controller');
 //var image_multer_controller = require('./multers/imageMulterController');
 
 /* upload and save image name */

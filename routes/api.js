@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var register_controller = require('../app/controllers/register/registerController');
-var image_controller = require('../app/controllers/upload/uploadImagesController');
-var send_email_controller = require('../app/controllers/send_email/sendEmailController');
+var register_controller = require('../app/controllers/register/register_controller');
+var image_controller = require('../app/controllers/upload/upload_images_controller');
+var send_email_controller = require('../app/controllers/send_email/send_email_controller');
 
 /* Api for register */
 router.get('/register', register_controller.index);
