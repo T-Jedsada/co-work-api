@@ -1,7 +1,7 @@
 require('dotenv').config();
 var mongojs = require('mongojs');
 var bcrypt = require('bcrypt');
-var base_response = require('../base_controller');
+var base_response = require('../../base_controller');
 var send_email = require('../send_email/verify_controller');
 var upload_image = require('./upload_images_controller');
 
@@ -64,7 +64,7 @@ exports.delete = function(req, res, next) {
 };
 
 /* Delete user register all */
-exports.delete_all = function(req, res, next) {
+exports.delete_overall = function(req, res, next) {
     database.users.remove({},function(err, user){
         if(err){
             return res.json('Can not delete user');
