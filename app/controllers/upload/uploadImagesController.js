@@ -6,11 +6,7 @@ var base_response = require('../baseController');
 /* upload and save image name */
 exports.upload = function(req, res, next) {
     var upload = multer({
-        storage: storage,
-        fileFilter: file_filter,
-        limits:{
-            fileSize: 1024 * 1024
-        }
+        storage: storage
     }).single('image');
     upload(req, res, function(err) {
         if (err) {
@@ -22,7 +18,7 @@ exports.upload = function(req, res, next) {
         if(!req.file.mimetype.startsWith('image')){
             res.json(base_response.error('Error: Don,t file images!'));
         }
-        res.json(base_response.success('File uploaded sucessfully!'));
+        res.json(base_response.success(multer(storage.filename)));
       });
 };
 

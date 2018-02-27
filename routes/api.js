@@ -7,7 +7,7 @@ var send_email_controller = require('../app/controllers/send_email/sendEmailCont
 /* Api for register */
 router.get('/register', register_controller.index);
 router.post('/register', register_controller.store);
-router.put('/register/verify/:id', register_controller.verify);
+router.get('/register/verify/:id', register_controller.verify);
 router.delete('/register/delete/:id', register_controller.delete);
 
 /* Api for file image upload */
