@@ -23,11 +23,12 @@ exports.index = function(req, res, next) {
 /* Save Register */
 exports.store = function(req, res, next) {
     var user_form = req.body;
+    var user = {};
+
     if (user_form.password !== user_form.confirm_password){
         return res.json(base_response.error('Password not math!!'))
     }
 
-    var user = {};
     var image = upload_image.upload(req, res);
     user.name = user_form.name;
     user.email = user_form.email;
@@ -35,7 +36,7 @@ exports.store = function(req, res, next) {
     user.status = false;
     user.image = image;
 
-    if(!user.name || !user.email || !user.password){
+    if(!user.name || !user.email || !user.password || user.image){
         res.status(400);
         return res.json(base_response.error('The details are not complete.'));
     }

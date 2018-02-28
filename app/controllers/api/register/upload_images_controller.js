@@ -1,6 +1,6 @@
 require('dotenv').config();
 var multer = require('multer');
-var multerS3 = require('multer-s3');
+var multer_s3 = require('multer-s3');
 var base_response = require('../../base_controller');
 var aws = require('aws-sdk');
 var file_name;
@@ -11,7 +11,7 @@ aws.config.update({
     region: process.env.AWS_REGION
 });
 var s3 = new aws.S3();
-var storage = multerS3({
+var storage = multer_s3({
     s3: s3,
     bucket: process.env.AWS_BUCKET,
     key: function (req, file, cb) {
