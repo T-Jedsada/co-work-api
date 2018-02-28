@@ -19,4 +19,5 @@ router.post('/upload',image_controller.uploaded);
 
 /* Api for send email */
 router.post('/send-email',send_email_controller.index);
+
 module.exports = router;
