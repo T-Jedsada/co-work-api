@@ -1,5 +1,5 @@
 require('dotenv').config();
-var base_response = require('../base_controller');
+var base_response = require('../../base_controller');
 var nodemailer = require('nodemailer');
 
 /*send email */

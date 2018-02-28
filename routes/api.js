@@ -1,18 +1,23 @@
 var express = require('express');
 var router = express.Router();
-var register_controller = require('../app/controllers/register/register_controller');
-var image_controller = require('../app/controllers/upload/upload_images_controller');
-var send_email_controller = require('../app/controllers/send_email/send_email_controller');
+var multer = require('multer');
+var upload = multer();
+
+var register_controller = require('../app/controllers/api/register/register_controller');
+var image_controller = require('../app/controllers/api/upload/upload_images_controller');
+var send_email_controller = require('../app/controllers/api/send_email/send_email_controller');
 
 /* Api for register */
 router.get('/register', register_controller.index);
 router.post('/register', register_controller.store);
 router.get('/register/verify/:id', register_controller.verify);
 router.delete('/register/delete/:id', register_controller.delete);
+router.delete('/register/delete-overall', register_controller.delete_overall);
 
 /* Api for file image upload */
-router.post('/upload-image',image_controller.upload);
+router.post('/upload',image_controller.uploaded);
 
 /* Api for send email */
 router.post('/send-email',send_email_controller.index);
+
 module.exports = router;

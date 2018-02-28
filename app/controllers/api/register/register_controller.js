@@ -1,8 +1,13 @@
 require('dotenv').config();
 var mongojs = require('mongojs');
 var bcrypt = require('bcrypt');
-var base_response = require('../base_controller');
+var base_response = require('../../base_controller');
 var send_email = require('../send_email/verify_controller');
+var upload_image = require('./upload_images_controller');
+
+var multer = require('multer');
+
+
 var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE]);
 
 /* List data in database */
@@ -17,8 +22,12 @@ exports.index = function(req, res, next) {
 
 /* Save Register */
 exports.store = function(req, res, next) {
+
     var user = req.body;
+    var image = upload_image.upload(req, req.files);
     user.status = false;
+    user.image = image;
+
     if(!user.name || !user.email || !user.password || !user.image){
         res.status(400);
         return res.json(base_response.error('The details are not complete.'));
@@ -32,6 +41,7 @@ exports.store = function(req, res, next) {
         if (user){
             return res.json(base_response.error('This email is already used.'));
         }
+        return res.end();
     });*/
     /* insert data to database */
     database.users.save(user, function (err, user) {
@@ -46,6 +56,16 @@ exports.store = function(req, res, next) {
 /* Delete user register */
 exports.delete = function(req, res, next) {
     database.users.remove({_id: mongojs.ObjectId(req.params.id)}, function(err, user){
+        if(err){
+            return res.json('Can not delete user');
+        }
+        return res.json(base_response.success(user));
+    });
+};
+
+/* Delete user register all */
+exports.delete_overall = function(req, res, next) {
+    database.users.remove({},function(err, user){
         if(err){
             return res.json('Can not delete user');
         }
