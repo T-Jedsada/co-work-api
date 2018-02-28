@@ -17,7 +17,7 @@ module.exports = {
             html:
             '<h2>Welco register to CO-Work</h2>'+
             '<p>click ' +
-                '<a href="'+ localhost +'/confirm-singup/'+ user_id +'">' +
+                '<a href="https://api-co-work.herokuapp.com/confirm-singup/'+ user_id +'">' +
                     '<h3>Click sing-up</h3>' +
                 '</a>' +
                 '<p>To confirm your register</p>'+
