@@ -28,7 +28,7 @@ exports.store = function(req, res, next) {
     user.status = false;
     user.image = image;
 
-    if(!user.name || !user.email || !user.password || !user.image){
+    if(!user.name || !user.email || !user.password){
         res.status(400);
         return res.json(base_response.error('The details are not complete.'));
     }

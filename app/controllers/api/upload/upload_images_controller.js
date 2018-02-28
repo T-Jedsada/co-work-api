@@ -28,7 +28,7 @@ exports.uploaded = function (req, res, next) {
         if (err) {
             res.json(base_response.error('Error: Have something wrong!'));
         }
-        res.send(process.env.AWS_3S_AMAZONAWS + '/' + process.env.AWS_BUCKET + '/' +file_name);
+        res.send(process.env.AWS_3S_AMAZONAWS + '/' + process.env.AWS_BUCKET + '/' + file_name);
     });
 };
 
