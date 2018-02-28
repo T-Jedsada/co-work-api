@@ -9,7 +9,7 @@ var send_email_controller = require('../app/controllers/api/send_email/send_emai
 
 /* Api for register */
 router.get('/register', register_controller.index);
-router.post('/register', upload.any(), register_controller.store);
+router.post('/register', register_controller.store);
 router.get('/register/verify/:id', register_controller.verify);
 router.delete('/register/delete/:id', register_controller.delete);
 router.delete('/register/delete-overall', register_controller.delete_overall);
