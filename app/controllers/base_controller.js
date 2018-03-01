@@ -3,7 +3,9 @@ module.exports = {
         if(data.constructor === String){
             return {
                 'success': true,
-                'massage': data
+                'data': {
+                    'massage' : data
+                }
             };
         }
         return {
@@ -14,7 +16,9 @@ module.exports = {
     error: function (massage) {
         return {
             'success': false,
-            'massage': 'Error: ' + massage
+            'data': {
+                'error' : massage
+            }
         };
     }
 };

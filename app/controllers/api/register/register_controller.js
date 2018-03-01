@@ -7,8 +7,7 @@ var upload_image = require('./upload_images_controller');
 
 var multer = require('multer');
 
-
-var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE]);
+var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE_USERS]);
 
 /* List data in database */
 exports.index = function(req, res, next) {
@@ -25,14 +24,14 @@ exports.store = function(req, res, next) {
     var user_form = req.body;
     var user = {};
 
-    var image = upload_image.upload(req, res);
     user.name = user_form.name;
     user.email = user_form.email;
     user.password = user_form.password;
+    user.image = user_form.image;
     user.status = false;
-    user.image = image;
+    user.facebook_id = user_form.facebook_id;
 
-    if(!user.name || !user.email || !user.password){
+    if(!user.name || !user.email || !user.password || !user.image){
         res.status(400);
         return res.json(base_response.error('The details are not complete.'));
     }

@@ -1,6 +1,6 @@
 require('dotenv').config();
 var mongojs = require('mongojs');
-var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE]);
+var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE_USERS]);
 
 /* Update status register*/
 exports.verify = function(req, res, next) {
