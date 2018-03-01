@@ -5,7 +5,7 @@ var register_controller = require('../app/controllers/api/register/register_cont
 var forgot_password_controller = require('../app/controllers/api/register/forgot_password/forgot_password_controller');
 var register_provider_controller = require('../app/controllers/api/register/register_provider_controller');
 var upload_controller = require('../app/controllers/api/upload/upload_images_controller');
-var send_email_controller = require('../app/controllers/api/send_email/send_email_controller');
+var send_email_controller = require('../app/controllers/api/send_email/confirm_register_controller');
 
 /* Api for register */
 router.get('/register', register_controller.index);
