@@ -7,8 +7,7 @@ var upload_image = require('./upload_images_controller');
 
 var multer = require('multer');
 
-
-var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE]);
+var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE_USERS]);
 
 /* List data in database */
 exports.index = function(req, res, next) {

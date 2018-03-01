@@ -2,7 +2,7 @@ require('dotenv').config();
 var api_key = process.env.API_KEY_SEND_EMAIL;
 var domain = process.env.DOMAIN_KEY_SEND_EMAIL;
 var from_email = process.env.USERS_NAME_SEND_EMAIL;
-var localhost = process.env.HOST_LOCALHOST;
+var host = process.env.HOST_DOMAIN;
 
 module.exports = {
     verifies: function (user) {
@@ -17,7 +17,7 @@ module.exports = {
             html:
             '<h2>Welco register to CO-Work</h2>'+
             '<p>click ' +
-                '<a href="https://api-co-work.herokuapp.com/confirm-singup/'+ user_id +'">' +
+                '<a href="'+ host +'/confirm-singup/'+ user_id +'">' +
                     '<h3>Click sing-up</h3>' +
                 '</a>' +
                 '<p>To confirm your register</p>'+
