@@ -2,8 +2,6 @@ require('dotenv').config();
 var mongojs = require('mongojs');
 var bcrypt = require('bcrypt');
 var base_response = require('../../base_controller');
-var send_email = require('../send_email/verify_controller');
-var upload_image = require('./upload_images_controller');
 
 var multer = require('multer');
 var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE_USERS]);
@@ -27,12 +25,11 @@ exports.store = function(req, res, next) {
         return res.json(base_response.error('Password not math!!'))
     }
 
-    var image = upload_image.upload(req, res);
     user.name = user_form.name;
     user.email = user_form.email;
     user.password = user_form.password;
     user.status = false;
-    user.image = image;
+    user.image = user_form.image;
 
     if(!user.name || !user.email || !user.password){
         res.status(400);
@@ -54,7 +51,6 @@ exports.store = function(req, res, next) {
         if (err) {
             return res.json(base_response.error('Can not save register'));
         }
-        send_email.verifies(user);
         return res.json(base_response.success(user));
     });
 };

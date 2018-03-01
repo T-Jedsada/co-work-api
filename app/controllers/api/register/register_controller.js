@@ -2,8 +2,6 @@ require('dotenv').config();
 var mongojs = require('mongojs');
 var bcrypt = require('bcrypt');
 var base_response = require('../../base_controller');
-var send_email = require('../send_email/verify_controller');
-var upload_image = require('./upload_images_controller');
 
 var multer = require('multer');
 
@@ -51,7 +49,6 @@ exports.store = function(req, res, next) {
         if (err) {
             return res.json(base_response.error('Can not save register'));
         }
-        send_email.verifies(user);
         return res.json(base_response.success(user));
     });
 };

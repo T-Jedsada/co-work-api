@@ -22,9 +22,9 @@ exports.index = function(req, res, next) {
 
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
-            res.json(base_response.error('Error: Have something wrong!'))
+            return res.json(base_response.error('Error: Have something wrong!'))
         } else {
-            res.json(base_response.success('Send email successfully'))
+            return res.json(base_response.success('Send email successfully'))
         }
     });
 };
