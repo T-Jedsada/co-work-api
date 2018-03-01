@@ -1,6 +1,6 @@
 require('dotenv').config();
 var multer = require('multer');
-var multerS3 = require('multer-s3');
+var multer_s3 = require('multer-s3');
 var base_response = require('../../base_controller');
 var aws = require('aws-sdk');
 var file_name;
@@ -11,7 +11,7 @@ aws.config.update({
     region: process.env.AWS_REGION
 });
 var s3 = new aws.S3();
-var storage = multerS3({
+var storage = multer_s3({
     s3: s3,
     bucket: process.env.AWS_BUCKET,
     key: function (req, file, cb) {
@@ -22,14 +22,15 @@ var storage = multerS3({
 });
 
 /* upload and save image name */
-exports.upload = function (req, res, next) {
-    var upload = multer({storage: storage}).array('image', 1);
-    upload(req, res, function (err) {
-        if (err) {
-            return res.json(base_response.error('Error: Have something wrong!'));
-        }
-        return res.json(base_response.success(process.env.AWS_3S_AMAZONAWS + '/' + process.env.AWS_BUCKET + '/' + file_name));
-    });
+module.exports = {
+    upload: function(req, res) {
+        var upload = multer({storage: storage}).array('image', 1);
+        upload(req, res, function (err) {
+            if (err) {
+                res.json(base_response.error('Error: Have something wrong!'));
+            }
+        });
+        return process.env.AWS_3S_AMAZONAWS + '/' + process.env.AWS_BUCKET + '/' + file_name;
+    }
 };
-
 
