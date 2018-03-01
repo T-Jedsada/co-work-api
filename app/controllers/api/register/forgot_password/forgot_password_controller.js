@@ -16,5 +16,5 @@ exports.forgot_password = function(req, res, next) {
             return res.json(base_response.error('This email do not sing up'));
         }
     });
-    return res.json(base_response.success('change password.'))
+    return res.json(base_response.success('uchange password.'))
 };
