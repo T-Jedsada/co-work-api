@@ -4,7 +4,6 @@ var bcrypt = require('bcrypt');
 var base_response = require('../../base_controller');
 
 var multer = require('multer');
-
 var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE_USERS]);
 
 /* List data in database */
@@ -22,14 +21,17 @@ exports.store = function(req, res, next) {
     var user_form = req.body;
     var user = {};
 
+    if (user_form.password !== user_form.confirm_password){
+        return res.json(base_response.error('Password not math!!'))
+    }
+
     user.name = user_form.name;
     user.email = user_form.email;
     user.password = user_form.password;
-    user.image = user_form.image;
     user.status = false;
-    user.facebook_id = user_form.facebook_id;
+    user.image = user_form.image;
 
-    if(!user.name || !user.email || !user.password || !user.image){
+    if(!user.name || !user.email || !user.password){
         res.status(400);
         return res.json(base_response.error('The details are not complete.'));
     }
