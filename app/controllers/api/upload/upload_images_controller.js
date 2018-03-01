@@ -22,7 +22,7 @@ var storage = multerS3({
 });
 
 /* upload and save image name */
-exports.uploaded = function (req, res, next) {
+exports.upload = function (req, res, next) {
     var upload = multer({storage: storage}).array('image', 1);
     upload(req, res, function (err) {
         if (err) {
