@@ -40,7 +40,7 @@ exports.store = function(req, res, next) {
     /* check email in database users */
     database.users.findOne({email: user.email}, function(err, user) {
         if (user){
-            return res.json(base_response.error('This email is already used.'));
+            return res.json(base_response.error('This  email is already used.'));
         }
     });
     /* insert data to database */
