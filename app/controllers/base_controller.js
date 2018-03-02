@@ -20,6 +20,9 @@ module.exports = {
                 'error' : massage
             }
         };
+    },
+    to_json: function (data) {
+        return JSON.parse(data)
     }
 };
 
