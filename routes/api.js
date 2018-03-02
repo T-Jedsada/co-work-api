@@ -22,6 +22,7 @@ router.post('/register/forgot-password', forgot_password_controller.forgot_passw
 router.post('/upload-image', upload_controller.upload);
 
 /* Api for send email */
-router.post('/send-email', send_email_controller.index);
+router.post('/send-email/confirm-register',send_email_controller.index);
+router.post('/send-email/change-password',send_email_controller.index);
 
 module.exports = router;

@@ -38,12 +38,11 @@ exports.store = function(req, res, next) {
         user.password = hash;
     });
     /* check email in database users */
-    /*database.users.find({email: user.email}, function(err, user) {
+    database.users.findOne({email: user.email}, function(err, user) {
         if (user){
             return res.json(base_response.error('This email is already used.'));
         }
-        return res.end();
-    });*/
+    });
     /* insert data to database */
     database.users.save(user, function (err, user) {
         if (err) {
