@@ -21,7 +21,7 @@ exports.index = function(req, res, next) {
 exports.store = function(req, res, next) {
     var user_form = req.body;
     var user = {};
-
+    var test;
     user.name = user_form.name;
     user.email = user_form.email;
     user.password = user_form.password;
@@ -40,16 +40,18 @@ exports.store = function(req, res, next) {
     /* check email in database users */
     database.users.findOne({email: user.email}, function(err, user) {
         if (user){
-            return res.json(base_response.error('This  email is already used.'));
+            //return res.json(base_response.error('This  email is already used.'));
+            test = user.email;
         }
+        /* insert data to database */
+        database.users.save(user, function (err, user) {
+            if (err) {
+                return res.json(base_response.error('Can not save register'));
+            }
+            return res.json(base_response.success(user));
+        });
     });
-    /* insert data to database */
-    database.users.save(user, function (err, user) {
-        if (err) {
-            return res.json(base_response.error('Can not save register'));
-        }
-        return res.json(base_response.success(user));
-    });
+
 };
 
 /* Delete user register */
