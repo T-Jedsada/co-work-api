@@ -4,11 +4,7 @@ var base_response = require('../../../base_controller');
 
 var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE_USERS]);
 
-/* Save Register */
-exports.index = function(req, res, next) {
-
-};
-
+/* check email */
 exports.forgot_password = function(req, res, next) {
     var user = req.body;
     database.users.findOne({email: user.email}, function(err, user) {
