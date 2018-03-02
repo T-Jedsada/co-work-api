@@ -38,9 +38,9 @@ exports.store = function(req, res, next) {
         user.password = hash;
     });
     /* check email in database users */
-    database.users.findOne({email: user.email}, function(err, user) {
-        if (user){
-            return res.json(base_response.error('This  email is already used.'));
+    database.users.findOne({email: user.email}, function(err, req) {
+        if (req){
+            return res.json(base_response.error('This  email is already used'));
         }
         /* insert data to database */
         database.users.save(user, function (err, user) {
@@ -50,7 +50,6 @@ exports.store = function(req, res, next) {
             return res.json(base_response.success(user));
         });
     });
-
 };
 
 /* Delete user register */
