@@ -2,25 +2,19 @@ require('dotenv').config();
 var mongojs = require('mongojs');
 var bcrypt = require('bcrypt');
 var base_response = require('../../base_controller');
-
 var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE_USERS]);
 
-/* List data in database */
 exports.index = function(req, res, next) {
     return res.json(base_response.error('this test'))
 };
 
-/* List data in database */
 exports.login = function(req, res, next) {
     var email = req.body.email;
     var password = req.body.password;
-
     if(!email || !password){
         res.status(400);
         return res.json(base_response.error('The details are not complete.'));
     }
-
-    /* hash password */
     bcrypt.hash(password, 10, function (err, hash) {
         password = hash;
     });

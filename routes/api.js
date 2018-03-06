@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var multer = require('multer');
-var middleware = multer();
+var multers = multer();
 
 var register_controller = require('../app/controllers/api/register/register_controller');
 var forgot_password_controller = require('../app/controllers/api/register/forgot_password/forgot_password_controller');
@@ -14,7 +14,7 @@ var change_password_controller = require('../app/controllers/api/register/forgot
 
 /* Api for register */
 router.get('/register', register_controller.index);
-router.post('/register', middleware.any(),register_controller.store);
+router.post('/register', multers.any(),register_controller.store);
 router.post('/register/provider',  register_provider_controller.store);
 router.get('/register/verify/:id', register_controller.verify);
 router.delete('/register/delete/:id', register_controller.delete);
@@ -25,7 +25,7 @@ router.get('/login', login_controller.index);
 router.post('/login', login_controller.login);
 
 /* Api for forgot password */
-router.post('/register/forgot-password', middleware.any(), forgot_password_controller.forgot_password);
+router.post('/register/forgot-password', multers.any(), forgot_password_controller.forgot_password);
 
 /* Api for file image upload */
 router.post('/upload-image', upload_controller.upload);

@@ -1,7 +1,7 @@
 require('dotenv').config();
 var mongojs = require('mongojs');
 var bcrypt = require('bcrypt');
-var base_response = require('../../base_controller');
+var base_response = require('../../../base_controller');
 
 var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE_USERS]);
 
