@@ -1,5 +1,5 @@
 require('dotenv').config();
-var passwordHash = require('password-hash');
+var password_hash = require('password-hash');
 var mongojs = require('mongojs');
 var base_response = require('../../base_controller');
 
@@ -25,7 +25,7 @@ exports.store = function(req, res, next) {
 
     user.name = user_form.name;
     user.email = user_form.email;
-    user.password = passwordHash.generate(user_form.password);
+    user.password = password_hash.generate(user_form.password);
     user.image = user_form.image;
     user.status = false;
     user.facebook_id = user_form.facebook_id;
