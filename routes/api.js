@@ -21,7 +21,6 @@ router.delete('/register/delete/:id', register_controller.delete);
 router.delete('/register/delete-overall', register_controller.delete_overall);
 
 /* Api for login */
-router.get('/login', login_controller.index);
 router.post('/login', login_controller.login);
 
 /* Api for forgot password */
