@@ -7,7 +7,7 @@ var register_controller = require('../app/controllers/api/register/register_cont
 var forgot_password_controller = require('../app/controllers/api/register/forgot_password/forgot_password_controller');
 var register_provider_controller = require('../app/controllers/api/register/register_provider_controller');
 var upload_controller = require('../app/controllers/api/upload/upload_images_controller');
-var confirm_singup_controller = require('../app/controllers/api/send_email/confirm_register_controller');
+var send_confirm_controller = require('../app/controllers/api/send_email/confirm_register_controller');
 var send_forgot_controller = require('../app/controllers/api/send_email/forgot_password_controller');
 var login_controller = require('../app/controllers/api/login/login_controller');
 var change_password_controller = require('../app/controllers/api/register/forgot_password/change_password_controller');
@@ -31,7 +31,7 @@ router.post('/register/forgot-password', middleware.any(), forgot_password_contr
 router.post('/upload-image', upload_controller.upload);
 
 /* Api for send email */
-router.post('/send-email/confirm-singup', confirm_singup_controller.index);
+router.post('/send-email/confirm-singup', send_confirm_controller.index);
 router.post('/send-email/forgot-password', send_forgot_controller.index);
 
 /* change password */
