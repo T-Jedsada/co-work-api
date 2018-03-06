@@ -22,7 +22,8 @@ exports.login = function(req, res, next) {
         if (!user){
             return res.json(base_response.error('Do not have this email in system.'));
         }
-        /*if (user.password !== password){
+        /*
+        if (user.password !== password){
             return res.json(base_response.error('Password not mate.'))
         }*/
         return res.json(base_response.success(user));
