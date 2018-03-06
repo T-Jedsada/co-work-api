@@ -10,6 +10,7 @@ exports.index = function(req, res, next) {
     var user = req.body;
     var user_id = user.id;
     var to_email = user.email;
+
     var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
     var data = {
