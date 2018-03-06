@@ -22,7 +22,7 @@ exports.index = function(req, res, next) {
             '<a href="'+ host +'/confirm-singup/'+ user_id +'">' +
                 '<h3>Click sing-up</h3>' +
             '</a>' +
-            '<p>To confirm your register</p>'+
+            '<p>To confirm your register </p>'+
         '</p>'
     };
 
