@@ -21,8 +21,8 @@ router.delete('/register/delete/:id', register_controller.delete);
 router.delete('/register/delete-overall', register_controller.delete_overall);
 
 /* Api for login */
-router.get('/login', login_controller.index);
-router.post('/login', login_controller.login);
+router.post('/email-login', login_controller.email_login);
+router.post('/facebook-login', login_controller.facebook_login);
 
 /* Api for forgot password */
 router.post('/register/forgot-password', middleware.any(), forgot_password_controller.forgot_password);
