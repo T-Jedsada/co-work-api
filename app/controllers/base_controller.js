@@ -4,7 +4,7 @@ module.exports = {
             return {
                 'success': true,
                 'data': {
-                    'massage' : data
+                    'message' : data
                 }
             };
         }
@@ -13,11 +13,11 @@ module.exports = {
             'data': data
         };
     },
-    error: function (massage) {
+    error: function (message) {
         return {
             'success': false,
             'data': {
-                'error' : massage
+                'error' : message
             }
         };
     }
