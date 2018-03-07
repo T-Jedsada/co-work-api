@@ -29,6 +29,7 @@ router.post('/register/forgot-password', multers.any(), forgot_password_controll
 /* Api for login */
 router.post('/email-login', login_controller.email_login);
 router.post('/facebook-login', login_controller.facebook_login);
+router.post('/admin-login', login_controller.admin_login);
 
 /* Api for file image upload */
 router.post('/upload-image', upload_controller.upload);
