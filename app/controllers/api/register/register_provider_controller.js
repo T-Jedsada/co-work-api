@@ -6,7 +6,6 @@ var base_response = require('../../base_controller');
 
 var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE_USERS]);
 
-/* Save Register */
 exports.store = function(req, res, next) {
     var user_form = req.body;
     var user = {};
@@ -42,7 +41,6 @@ exports.store = function(req, res, next) {
     });
 };
 
-/* Update status register*/
 exports.verify = function(req, res, next) {
     database.users.update({_id: mongojs.ObjectId(req.params.id)},{ $set: { status: true } }, function(err, user){
         if(err){
