@@ -35,6 +35,6 @@ router.post('/send-email/confirm-singup', confirm_singup_controller.index);
 router.post('/send-email/forgot-password', send_forgot_controller.index);
 
 /* change password */
-router.post('/change-password', change_password_controller.index);
+router.post('/change-password/:id', change_password_controller.index);
 
 module.exports = router;
