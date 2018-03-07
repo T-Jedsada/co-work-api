@@ -18,6 +18,9 @@ exports.store = function(req, res, next) {
     if (is_email.validate(user_form.email) === false){
         return res.json(base_response.error('Email not have @address.'));
     }
+    if (user_form.password.length < 6){
+        return res.json(base_response.error('Password length less than six.'));
+    }
 
     user.name = user_form.name;
     user.email = user_form.email;
