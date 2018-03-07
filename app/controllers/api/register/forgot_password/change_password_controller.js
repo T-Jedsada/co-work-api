@@ -5,7 +5,6 @@ var base_response = require('../../../base_controller');
 
 var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE_USERS]);
 
-/* List data in database */
 exports.index = function(req, res, next) {
     if(!req.body.password){
         res.status(400);
