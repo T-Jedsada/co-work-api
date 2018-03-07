@@ -25,6 +25,9 @@ exports.email_login = function(req, res, next) {
         if (password_hash.verify(password, user.password) === false){
             return res.json(base_response.error('Password not mate.'));
         }
+        if (user.rolse === 'admin') {
+            return res.json(base_response.success(user));
+        }
         return res.json(base_response.success(user));
     });
 };
