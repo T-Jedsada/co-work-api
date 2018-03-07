@@ -1,6 +1,7 @@
 require('dotenv').config();
 var password_hash = require('password-hash');
 var mongojs = require('mongojs');
+var is_email = require("email-validator");
 var base_response = require('../../base_controller');
 var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE_USERS]);
 
