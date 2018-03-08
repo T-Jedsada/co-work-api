@@ -1,16 +1,23 @@
 require('dotenv').config();
+var is_email = require("email-validator");
 var base_response = require('../../base_controller');
 var api_key = process.env.API_KEY_SEND_EMAIL;
 var domain = process.env.DOMAIN_KEY_SEND_EMAIL;
 var from_email = process.env.USERS_NAME_SEND_EMAIL;
 var host = process.env.HOST_DOMAIN;
 
-/*send email */
 exports.index = function(req, res, next) {
     var user = req.body;
     var user_id = user.id;
     var to_email = user.email;
     var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+
+    if (!user_id || !to_email){
+        return res.json(base_response.error('The details are not complete.'))
+    }
+    if (is_email.validate(to_email) === false){
+        return res.json(base_response.error('Email not have @address.'));
+    }
 
     var data = {
         from: from_email,

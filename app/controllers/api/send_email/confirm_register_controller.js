@@ -1,4 +1,5 @@
 require('dotenv').config();
+var is_email = require("email-validator");
 var base_response = require('../../base_controller');
 var api_key = process.env.API_KEY_SEND_EMAIL;
 var domain = process.env.DOMAIN_KEY_SEND_EMAIL;
@@ -12,6 +13,13 @@ exports.index = function(req, res, next) {
     var to_email = user.email;
     var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
+    if (!user_id || !to_email){
+        return res.json(base_response.error('The details are not complete.'))
+    }
+    if (is_email.validate(to_email) === false){
+        return res.json(base_response.error('Email not have @address.'));
+    }
+
     var data = {
         from: from_email,
         to: to_email,
@@ -22,7 +30,7 @@ exports.index = function(req, res, next) {
             '<a href="'+ host +'/confirm-singup/'+ user_id +'">' +
                 '<h3>Click sing-up</h3>' +
             '</a>' +
-            '<p>To confirm your register</p>'+
+            '<p>To confirm your register </p>'+
         '</p>'
     };
 
