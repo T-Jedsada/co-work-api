@@ -11,6 +11,7 @@ var upload_controller = require('../app/controllers/api/upload/upload_images_con
 var send_confirm_controller = require('../app/controllers/api/send_email/confirm_register_controller');
 var send_forgot_controller = require('../app/controllers/api/send_email/forgot_password_controller');
 var login_controller = require('../app/controllers/api/login/login_controller');
+var list_cowork_controller = require('../app/controllers/api/list_cowork/list_cowork_controller');
 var change_password_controller = require('../app/controllers/api/register/forgot_password/change_password_controller');
 
 /* Api for register */
@@ -40,5 +41,8 @@ router.post('/send-email/forgot-password', send_forgot_controller.index);
 
 /* Api change password */
 router.post('/change-password', change_password_controller.index);
+
+/* Api list co-work */
+router.get('/list-cowork', list_cowork_controller.store);
 
 module.exports = router;
