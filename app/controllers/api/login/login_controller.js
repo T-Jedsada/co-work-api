@@ -3,6 +3,7 @@ var mongojs = require('mongojs');
 var password_hash = require('password-hash');
 var is_email = require("email-validator");
 var base_response = require('../../base_controller');
+var users_model  = require('../../../models/users_model');
 
 var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE_USERS]);
 
@@ -25,7 +26,7 @@ exports.email_login = function(req, res, next) {
         if (password_hash.verify(password, user.password) === false){
             return res.json(base_response.error('Password not mate.'));
         }
-        return res.json(base_response.success(user));
+        return res.json(base_response.success(new users_model(user)));
     });
 };
 

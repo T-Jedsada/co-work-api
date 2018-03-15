@@ -43,6 +43,6 @@ router.post('/send-email/forgot-password', send_forgot_controller.index);
 router.post('/change-password', change_password_controller.index);
 
 /* Api list co-work */
-router.get('/list-cowork', list_cowork_controller.store);
+router.post('/list-cowork', list_cowork_controller.store);
 
 module.exports = router;
