@@ -6,7 +6,7 @@ var base_response = require('../../base_controller');
 exports.index = function(req, res, next) {
     database.coworking.find(function(err, result){
         if(err){
-            res.json(base_response.error('Not have information'));
+            res.json(base_response.error('Not have information.'));
         }
         res.json(base_response.success(result));
     });
