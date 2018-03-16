@@ -4,32 +4,40 @@ var multerS3 = require('multer-s3');
 var base_response = require('../../base_controller');
 var aws = require('aws-sdk');
 var file_name;
+var file_type;
+
 
 aws.config.update({
     secretAccessKey: process.env.AWS_SECRET_ATCCESS_KEY,
     accessKeyId: process.env.AWS_ACCESS_KEY,
     region: process.env.AWS_REGION
 });
-var s3 = new aws.S3();
-var storage = multerS3({
-    s3: s3,
-    bucket: process.env.AWS_BUCKET,
-    key: function (req, file, cb) {
-        //console.log(file);
-        file_name = file.originalname;
-        cb(null, file.originalname);
-    },
-    ContentType :'image/jpg'
-});
+
 
 /* upload and save image name */
 exports.upload = function (req, res, next) {
+    var storage = multerS3({
+        s3: new aws.S3(),
+        bucket: process.env.AWS_BUCKET,
+        key: function (req, file, cb) {
+            console.log(file);
+            file_type = file.mimetype;
+            file_name = file.originalname;
+            cb(null, Date.now() + file.originalname);
+        },
+        contentType: multerS3.AUTO_CONTENT_TYPE
+    });
+
     var upload = multer({storage: storage}).array('image', 1);
     upload(req, res, function (err) {
         if (err) {
             return res.json(base_response.error('Error: Have something wrong!'));
         }
-        return res.json(base_response.success('https://co-working-20scoops.s3-ap-southeast-1.amazonaws.com/' + file_name));
+        if (file_type !== "image/jpg" || file_type !== "image/jpeg" || file_type !== "image/png" || file_type !== "image/gif") {
+            return res.json(base_response.error('This not image!'))
+        }
+        //return res.json(base_response.success(process.env.AWS_3S_AMAZONAWS + '/' + process.env.AWS_BUCKET + '/' + file_name));
+        return res.json(base_response.success(file_type));
     });
 };
 
