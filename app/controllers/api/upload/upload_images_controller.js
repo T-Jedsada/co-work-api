@@ -15,10 +15,11 @@ var storage = multerS3({
     s3: s3,
     bucket: process.env.AWS_BUCKET,
     key: function (req, file, cb) {
-        console.log(file);
+        //console.log(file);
         file_name = file.originalname;
         cb(null, file.originalname);
-    }
+    },
+    ContentType :'image/jpg'
 });
 
 /* upload and save image name */
@@ -28,7 +29,7 @@ exports.upload = function (req, res, next) {
         if (err) {
             return res.json(base_response.error('Error: Have something wrong!'));
         }
-        return res.json(base_response.success(process.env.AWS_3S_AMAZONAWS + '/' + process.env.AWS_BUCKET + '/' + file_name));
+        return res.json(base_response.success('https://co-working-20scoops.s3-ap-southeast-1.amazonaws.com/' + file_name));
     });
 };
 

@@ -1,6 +1,6 @@
 require('dotenv').config();
 var mongojs = require('mongojs');
-var base_response = require('../../../base_controller');
+var base_response = require('../../base_controller');
 var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE_USERS]);
 
 exports.index = function(req, res, next) {

@@ -4,7 +4,8 @@ var multer = require('multer');
 var multers = multer();
 
 var register_controller = require('../app/controllers/api/register/register_controller');
-var manage_users_controller = require('../app/controllers/api/register/manage_users/manage_users_controller');
+var manage_users_controller = require('../app/controllers/api/manages/manage_users_controller');
+var manage_coworking_controller = require('../app/controllers/api/manages/manage_coworking_controller');
 var forgot_password_controller = require('../app/controllers/api/register/forgot_password/forgot_password_controller');
 var register_provider_controller = require('../app/controllers/api/register/register_provider_controller');
 var upload_controller = require('../app/controllers/api/upload/upload_images_controller');
@@ -18,11 +19,6 @@ var change_password_controller = require('../app/controllers/api/register/forgot
 router.post('/register', multers.any(),register_controller.store);
 router.post('/register/provider',  register_provider_controller.store);
 router.get('/register/verify/:id', register_controller.verify);
-
-/* Api for manage users */
-router.get('/register', manage_users_controller.index);
-router.delete('/register/delete/:id', manage_users_controller.delete);
-router.delete('/register/delete-overall', manage_users_controller.delete_overall);
 
 /* Api for forgot password */
 router.post('/register/forgot-password', multers.any(), forgot_password_controller.forgot_password);
@@ -43,6 +39,14 @@ router.post('/send-email/forgot-password', send_forgot_controller.index);
 router.post('/change-password', change_password_controller.index);
 
 /* Api list co-work */
+router.get('/list-cowork', list_cowork_controller.index);
 router.post('/list-cowork', list_cowork_controller.store);
+
+/* Api for manages */
+router.get('/register', manage_users_controller.index);
+router.delete('/register/delete/:id', manage_users_controller.delete);
+router.delete('/register/delete-overall', manage_users_controller.delete_overall);
+router.delete('/list-cowork/delete/:id', manage_coworking_controller.delete);
+router.delete('/list-cowork/delete-overall', manage_coworking_controller.delete_overall);
 
 module.exports = router;
