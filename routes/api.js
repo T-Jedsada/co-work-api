@@ -14,6 +14,7 @@ var send_forgot_controller = require('../app/controllers/api/send_email/forgot_p
 var login_controller = require('../app/controllers/api/login/login_controller');
 var list_cowork_controller = require('../app/controllers/api/list_cowork/list_cowork_controller');
 var change_password_controller = require('../app/controllers/api/register/forgot_password/change_password_controller');
+var test_controller = require('../app/controllers/test_controller');
 
 /* Api for register */
 router.post('/register', multers.any(),register_controller.store);
@@ -52,5 +53,7 @@ router.delete('/register/delete/:id', manage_users_controller.delete);
 router.delete('/register/delete-overall', manage_users_controller.delete_overall);
 router.delete('/list-cowork/delete/:id', manage_coworking_controller.delete);
 router.delete('/list-cowork/delete-overall', manage_coworking_controller.delete_overall);
+
+router.post('/test', test_controller.index);
 
 module.exports = router;

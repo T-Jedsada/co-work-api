@@ -16,7 +16,7 @@ exports.index = function(req, res, next) {
     if (!user_id || !to_email){
         return res.json(base_response.error('The details are not complete.'))
     }
-    if (is_email.validate(to_email) === false){
+    if (!is_email.validate(to_email)){
         return res.json(base_response.error('Email not have @address.'));
     }
 

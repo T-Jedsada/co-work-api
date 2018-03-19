@@ -53,18 +53,15 @@ exports.store = function(req, res, next) {
 
 exports.get_contact = function (req, res, next) {
     var user_id = req.body.id;
-    var contact = {};
 
     if (!user_id) {
         return res.json(base_response.error('The details are not complete.'));
     }
-    database.users.findOne({_id: mongojs.ObjectId(user_id)}, function(err, user) {
+    database.users.findOne({_id: mongojs.ObjectId(user_id)}, {phone: 1, contact: 1}, function(err, user) {
         if (err){
             return res.json(base_response.error('Have something wrong!'));
         }
-        contact.phone = user.phone;
-        contact.contact = user.contact;
-        return res.json(base_response.success(contact));
+        return res.json(base_response.success(user));
     });
 };
 
