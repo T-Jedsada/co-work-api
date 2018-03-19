@@ -14,9 +14,9 @@ exports.index = function(req, res, next) {
 };
 
 exports.detail = function(req, res, next){
-
-    if (req.body.id != null){
-    database.coworking.find({ _id: new ObjectId(req.body.id)},function(err, result){
+    if (!req.error){
+        var id = new ObjectId(req.body.id);
+    database.coworking.find({ _id: id},function(err, result){
         if(result[0]==null){
            return res.json(base_response.error('Not have information.'));
         }
