@@ -2,6 +2,7 @@ require('dotenv').config();
 var mongojs = require('mongojs');
 var database = mongojs(process.env.CONFIG_DATABASE);
 var base_response = require('../../base_controller');
+var ObjectId = require('mongodb').ObjectID;
 
 exports.index = function(req, res, next) {
     database.coworking.find({},{_id:1 , gellery :1 , name:1 ,rarting:1 ,address :1 , status:1},function(err, result){
@@ -11,6 +12,20 @@ exports.index = function(req, res, next) {
         return res.json(base_response.success(result));
     });
 };
+
+exports.detail = function(req, res, next){
+
+    if (req.body.id != null){
+    database.coworking.find({ _id: new ObjectId(req.body.id)},function(err, result){
+        if(result[0]==null){
+           return res.json(base_response.error('Not have information.'));
+        }
+        return res.json(base_response.success(result));
+    });
+    }else{
+        return res.json(base_response.error('You need to pass your password on password field.'));
+    }
+}
 
 exports.store = function(req, res, next) {
     list_cowork_form = req.body;

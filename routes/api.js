@@ -41,6 +41,7 @@ router.post('/change-password', change_password_controller.index);
 /* Api list co-work */
 router.get('/list-cowork', list_cowork_controller.index);
 router.post('/list-cowork', list_cowork_controller.store);
+router.post('/detail-cowork',multers.any(), list_cowork_controller.detail);
 
 /* Api provider */
 router.post('/provider/contact',  register_provider_controller.get_contact);
