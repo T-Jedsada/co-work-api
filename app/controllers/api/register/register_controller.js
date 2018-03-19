@@ -13,7 +13,7 @@ exports.store = function(req, res, next) {
         res.status(400);
         return res.json(base_response.error('The details are not complete.'));
     }
-    if (is_email.validate(user_form.email) === false){
+    if (!is_email.validate(user_form.email)){
         return res.json(base_response.error('Email not have @address.'));
     }
     if (user_form.password.length < 6){

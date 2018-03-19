@@ -12,6 +12,15 @@ exports.index = function(req, res, next) {
     });
 };
 
+exports.get_provider = function(req, res, next) {
+    database.users.find({role: "provider"},function(err, users){
+        if(err){
+            res.json(base_response.error('Not have information'));
+        }
+        res.json(base_response.success(users));
+    });
+};
+
 exports.delete = function(req, res, next) {
     database.users.remove({_id: mongojs.ObjectId(req.params.id)}, function(err, user){
         if(err){

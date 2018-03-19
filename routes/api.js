@@ -47,6 +47,7 @@ router.post('/provider/contact',  register_provider_controller.get_contact);
 
 /* Api for manages */
 router.get('/register', manage_users_controller.index);
+router.get('/provider', manage_users_controller.get_provider);
 router.delete('/register/delete/:id', manage_users_controller.delete);
 router.delete('/register/delete-overall', manage_users_controller.delete_overall);
 router.delete('/list-cowork/delete/:id', manage_coworking_controller.delete);
