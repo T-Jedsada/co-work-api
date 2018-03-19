@@ -4,18 +4,17 @@ var database = mongojs(process.env.CONFIG_DATABASE);
 var base_response = require('../../base_controller');
 
 exports.index = function(req, res, next) {
-    database.coworking.find(function(err, result){
-        if(err){
-            res.json(base_response.error('Not have information.'));
+    database.coworking.find({},{_id:1 , gellery :1 , name:1 ,rarting:1 ,address :1 , status:1},function(err, result){
+        if(result[0]==null){
+           return res.json(base_response.error('Not have information.'));
         }
-        res.json(base_response.success(result));
+        return res.json(base_response.success(result));
     });
 };
 
 exports.store = function(req, res, next) {
     list_cowork_form = req.body;
     list_cowork = {};
-
     list_cowork.name = list_cowork_form.name;
     list_cowork.details = list_cowork_form.details;
     list_cowork.rarting = list_cowork_form.rarting;
