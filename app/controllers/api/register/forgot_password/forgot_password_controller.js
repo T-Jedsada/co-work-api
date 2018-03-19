@@ -18,8 +18,12 @@ exports.forgot_password = function(req, res, next) {
         if (!user){
             return res.json(base_response.error('This email do not sing up')) ;
         }
+        if (user === false){
+            return res.json(base_response.error('Account not verify'))
+        }
         forgot_infor.id = user._id;
         forgot_infor.email = user.email;
+        forgot_infor.status = user.status;
         return res.json(base_response.success(forgot_infor));
     });
 };

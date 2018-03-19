@@ -42,6 +42,9 @@ router.post('/change-password', change_password_controller.index);
 router.get('/list-cowork', list_cowork_controller.index);
 router.post('/list-cowork', list_cowork_controller.store);
 
+/* Api provider */
+router.post('/provider/contact',  register_provider_controller.get_contact);
+
 /* Api for manages */
 router.get('/register', manage_users_controller.index);
 router.delete('/register/delete/:id', manage_users_controller.delete);

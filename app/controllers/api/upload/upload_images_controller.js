@@ -6,13 +6,11 @@ var aws = require('aws-sdk');
 var file_name;
 var file_type;
 
-
 aws.config.update({
     secretAccessKey: process.env.AWS_SECRET_ATCCESS_KEY,
     accessKeyId: process.env.AWS_ACCESS_KEY,
     region: process.env.AWS_REGION
 });
-
 
 /* upload and save image name */
 exports.upload = function (req, res, next) {
@@ -20,10 +18,9 @@ exports.upload = function (req, res, next) {
         s3: new aws.S3(),
         bucket: process.env.AWS_BUCKET,
         key: function (req, file, cb) {
-            console.log(file);
             file_type = file.mimetype;
-            file_name = file.originalname;
-            cb(null, Date.now() + file.originalname);
+            file_name = Date.now() + file.originalname;
+            cb(null, file_name);
         },
         contentType: multerS3.AUTO_CONTENT_TYPE
     });
@@ -31,13 +28,12 @@ exports.upload = function (req, res, next) {
     var upload = multer({storage: storage}).array('image', 1);
     upload(req, res, function (err) {
         if (err) {
-            return res.json(base_response.error('Error: Have something wrong!'));
+            return res.json(base_response.error('Have something wrong!'));
         }
-        if (file_type !== "image/jpg" || file_type !== "image/jpeg" || file_type !== "image/png" || file_type !== "image/gif") {
+        /*if (file_type !== "image/jpg" && file_type !== "image/jpeg" && file_type !== "image/png" && file_type !== "image/gif") {
             return res.json(base_response.error('This not image!'))
-        }
-        //return res.json(base_response.success(process.env.AWS_3S_AMAZONAWS + '/' + process.env.AWS_BUCKET + '/' + file_name));
-        return res.json(base_response.success(file_type));
+        }*/
+        return res.json(base_response.success(process.env.AWS_3S_AMAZONAWS + '/' + process.env.AWS_BUCKET + '/' + file_name));
     });
 };
 

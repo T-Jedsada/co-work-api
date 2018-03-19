@@ -26,6 +26,9 @@ exports.email_login = function(req, res, next) {
         if (password_hash.verify(password, user.password) === false){
             return res.json(base_response.error('Password not mate.'));
         }
+        if (user.status === false){
+            return res.json(base_response.error('Account not verify'))
+        }
         return res.json(base_response.success(new users_model(user)));
     });
 };

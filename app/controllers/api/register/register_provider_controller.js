@@ -4,7 +4,7 @@ var mongojs = require('mongojs');
 var is_email = require("email-validator");
 var base_response = require('../../base_controller');
 
-var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE_USERS]);
+var database = mongojs(process.env.CONFIG_DATABASE);
 
 exports.store = function(req, res, next) {
     var user_form = req.body;
@@ -25,7 +25,7 @@ exports.store = function(req, res, next) {
     user.email = user_form.email;
     user.password = password_hash.generate(user_form.password);
     user.status = false;
-    user.rolse = 'provider';
+    user.role = 'provider';
     user.image = user_form.image;
 
     database.users.findOne({email: user.email}, function(err, req) {
@@ -38,6 +38,20 @@ exports.store = function(req, res, next) {
             }
             return res.json(base_response.success(user));
         });
+    });
+};
+
+exports.get_contact = function (req, res, next) {
+    var user_id = req.body.id;
+
+    if (!user_id) {
+        return res.json(base_response.error('The details are not complete.'));
+    }
+    database.users.findOne({_id: mongojs.ObjectId(user_id)}, function(err, user) {
+        if (err){
+            return res.json(base_response.error('Have  something wrong!'));
+        }
+        return res.json(base_response.success(user));
     });
 };
 
