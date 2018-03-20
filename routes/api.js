@@ -61,5 +61,6 @@ router.post('/admin/judgement-cowork',multers.any(), manage_admin.judgeMentCowor
 router.post('/admin/show-comment',multers.any(),manage_admin.showComment)
 router.post('/admin/judge-comment',multers.any(),manage_admin.judgeMentComment)
 router.post('/admin/approve/', multers.any(),manage_admin.approveCoWork)
+router.post('/admin/co-work-list', manage_admin.showListCoWork)
 
 module.exports = router;
