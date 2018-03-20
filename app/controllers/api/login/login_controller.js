@@ -41,7 +41,7 @@ exports.admin_login = function(req, res, next) {
         res.status(400);
         return res.json(base_response.error('The details are not complete.'));
     }
-    if (is_email.validate(email) === false){
+    if (!is_email.validate(email)){
         return res.json(base_response.error('Email not have @address.'));
     }
 
@@ -50,7 +50,7 @@ exports.admin_login = function(req, res, next) {
             return res.json(base_response.error('Do not have this email in system.'));
         }
         if (password_hash.verify(password, user.password) === false){
-            return res.json(base_response.error('Password not mate.'));
+            return res.json(base_response.error('Password not match.'));
         }
         if (user.role !== 'admin') {
             return res.json(base_response.error('You are not admin.'));

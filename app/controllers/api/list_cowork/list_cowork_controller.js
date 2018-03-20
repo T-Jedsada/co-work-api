@@ -14,7 +14,7 @@ exports.index = function(req, res, next) {
 };
 
 exports.detail = function(req, res, next){
-    if (!req.error){
+    if (!req.body.err){
         var id = new ObjectId(req.body.id);
     database.coworking.find({ _id: id},function(err, result){
         if(result[0]==null){

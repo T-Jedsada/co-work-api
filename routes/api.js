@@ -6,6 +6,7 @@ var multers = multer();
 var register_controller = require('../app/controllers/api/register/register_controller');
 var manage_users_controller = require('../app/controllers/api/manages/manage_users_controller');
 var manage_coworking_controller = require('../app/controllers/api/manages/manage_coworking_controller');
+var manage_admin = require('../app/controllers/api/manages/manage_admin_controller');
 var forgot_password_controller = require('../app/controllers/api/register/forgot_password/forgot_password_controller');
 var register_provider_controller = require('../app/controllers/api/register/register_provider_controller');
 var upload_controller = require('../app/controllers/api/upload/upload_images_controller');
@@ -14,6 +15,7 @@ var send_forgot_controller = require('../app/controllers/api/send_email/forgot_p
 var login_controller = require('../app/controllers/api/login/login_controller');
 var list_cowork_controller = require('../app/controllers/api/list_cowork/list_cowork_controller');
 var change_password_controller = require('../app/controllers/api/register/forgot_password/change_password_controller');
+
 
 /* Api for register */
 router.post('/register', multers.any(),register_controller.store);
@@ -26,7 +28,7 @@ router.post('/register/forgot-password', multers.any(), forgot_password_controll
 /* Api for login */
 router.post('/email-login', login_controller.email_login);
 router.post('/facebook-login', login_controller.facebook_login);
-router.post('/admin-login', login_controller.admin_login);
+router.post('/admin-login',multers.any(), login_controller.admin_login);
 
 /* Api for file image upload */
 router.post('/upload-image', upload_controller.upload);
@@ -53,5 +55,11 @@ router.delete('/register/delete/:id', manage_users_controller.delete);
 router.delete('/register/delete-overall', manage_users_controller.delete_overall);
 router.delete('/list-cowork/delete/:id', manage_coworking_controller.delete);
 router.delete('/list-cowork/delete-overall', manage_coworking_controller.delete_overall);
+
+/* Api for admin */
+router.post('/admin/judgement-cowork',multers.any(), manage_admin.judgeMentCowork)
+router.post('/admin/show-comment',multers.any(),manage_admin.showComment)
+router.post('/admin/judge-comment',multers.any(),manage_admin.judgeMentComment)
+router.post('/admin/approve/', multers.any(),manage_admin.approveCoWork)
 
 module.exports = router;
