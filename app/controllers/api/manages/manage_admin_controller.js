@@ -4,17 +4,19 @@ var base_response = require('../../base_controller');
 var database = mongojs(process.env.CONFIG_DATABASE);
 
 exports.judgeMentCowork = function (req, res, next) {
-    database.coworking.update({ _id: mongojs.ObjectId(req.body.co_work_id) }, { $set: { status: "reject" } }, function (err, result) {
-        if (err) {
-            return res.json('Dude, You cant even delete it.');
+    database.coworking.update({ _id: mongojs.ObjectId(req.body.co_work_id) }, { $set: { approve: "reject" } }, function (err, result) {
+        console.log(result)
+        if (result.nModified == "0") {
+            return res.json(base_response.error('Dude, You cant even delete it.'));
         }
         return res.json(base_response.success('Complete ;C'));
     });
 }
 
 exports.approveCoWork = function (req, res, next) {
-    database.coworking.update({ _id: mongojs.ObjectId(req.body.co_work_id) }, { $set: { status: "true" } }, function (err, result) {
-        if (err) {
+    database.coworking.update({ _id: mongojs.ObjectId(req.body.co_work_id)}, { $set: { approve: "true" } }, function (err, result) {
+        console.log(result)
+        if (result.nModified == "0") {
             return res.json(base_response.error('Dude, You cant even do it.'));
         }
         return res.json(base_response.success('Complete ;D'));
@@ -33,7 +35,6 @@ exports.showComment = function (req, res, next) {
 
 exports.judgeMentComment = function (req, res, next) {
     database.comment.update({ _id: mongojs.ObjectId(req.body.id), status: "true" }, { $set: { status: "reject" } }, function (err, result) {
-        console.log(result);
         //hard handle
         if (result.n == "0") {
             return res.json(base_response.error('Dude, You cant even do it.'));
@@ -43,7 +44,7 @@ exports.judgeMentComment = function (req, res, next) {
 }
 
 exports.showListCoWork = function (req, res, next) {
-    database.coworking.find({}, { _id: 1, gellery: 1, name: 1, rarting: 1, address: 1, status: 1 }, function (err, result) {
+    database.coworking.find({}, { _id: 1, gellery: 1, name: 1, rarting: 1, address: 1, approve: 1 }, function (err, result) {
         if (result[0] == null) {
             return res.json(base_response.error('Not have information.'));
         }
