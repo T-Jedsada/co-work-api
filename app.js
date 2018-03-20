@@ -4,8 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
 
+var mongoose = require('mongoose');
 mongoose.connect('mongodb://root:root@ds245228.mlab.com:45228/cowork');
 
 var web = require('./routes/web');
@@ -16,7 +16,6 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.use('/', web);
 
 // uncomment after placing your favicon in /public
 app.use(logger('dev'));
@@ -25,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+app.use('/', web);
 app.use('/api', api);
 
 // catch 404 and forward to error handler
