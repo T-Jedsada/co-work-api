@@ -5,7 +5,6 @@ var database = mongojs(process.env.CONFIG_DATABASE);
 
 exports.judgeMentCowork = function (req, res, next) {
     database.coworking.update({ _id: mongojs.ObjectId(req.body.co_work_id) }, { $set: { approve: "reject" } }, function (err, result) {
-        console.log(result)
         if (result.nModified == "0") {
             return res.json(base_response.error('Dude, You cant even delete it.'));
         }
@@ -15,7 +14,6 @@ exports.judgeMentCowork = function (req, res, next) {
 
 exports.approveCoWork = function (req, res, next) {
     database.coworking.update({ _id: mongojs.ObjectId(req.body.co_work_id)}, { $set: { approve: "true" } }, function (err, result) {
-        console.log(result)
         if (result.nModified == "0") {
             return res.json(base_response.error('Dude, You cant even do it.'));
         }
@@ -24,7 +22,6 @@ exports.approveCoWork = function (req, res, next) {
 }
 
 exports.showComment = function (req, res, next) {
-    console.log(req.body.id);
     database.comment.find({ coworking_id: req.body.id, status: "true" }, function (err, result) {
         if (err) {
             return res.json(base_response.error('Dude, You cant even do it.'));
