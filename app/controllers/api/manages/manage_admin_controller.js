@@ -40,11 +40,20 @@ exports.judgeMentComment = function (req, res, next) {
     });
 }
 
-exports.showListCoWork = function(req, res, next) {
-    database.coworking.find({},{_id:1 , gellery :1 , name:1 ,rarting:1 ,address :1 , status:1},function(err, result){
-        if(result[0]==null){
-           return res.json(base_response.error('Not have information.'));
+exports.showListCoWork = function (req, res, next) {
+    database.coworking.find({}, { _id: 1, gellery: 1, name: 1, rarting: 1, address: 1, status: 1 }, function (err, result) {
+        if (result[0] == null) {
+            return res.json(base_response.error('Not have information.'));
         }
         return res.json(base_response.success(result));
     });
 };
+
+exports.showUserDetail = function (req, res, next) {
+    database.users.find({ _id: mongojs.ObjectId(req.body.id) }, { _id: 1, image: 1, name: 1 }, function (err, result) {
+        if (result[0] == null) {
+            return res.json(base_response.error('Not have information.'));
+        }
+        return res.json(base_response.success(result));
+    });
+}

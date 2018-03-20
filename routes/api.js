@@ -61,6 +61,8 @@ router.post('/admin/judgement-cowork',multers.any(), manage_admin.judgeMentCowor
 router.post('/admin/show-comment',multers.any(),manage_admin.showComment)
 router.post('/admin/judge-comment',multers.any(),manage_admin.judgeMentComment)
 router.post('/admin/approve/', multers.any(),manage_admin.approveCoWork)
-router.post('/admin/co-work-list', manage_admin.showListCoWork)
+router.get('/admin/co-work-list', manage_admin.showListCoWork)
+/* Api for select user data by user_id for admin and user {android} */
+router.post('/admin/detail-user/', multers.any(),manage_admin.showUserDetail)
 
 module.exports = router;
