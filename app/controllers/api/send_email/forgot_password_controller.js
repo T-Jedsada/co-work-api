@@ -13,9 +13,9 @@ exports.index = function(req, res, next) {
     var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
     if (!user_id || !to_email){
-        return res.json(base_response.error('The details are not complete.'))
+        return res.json(base_response.error('The details are not complete.'));
     }
-    if (is_email.validate(to_email) === false){
+    if (!is_email.validate(to_email)){
         return res.json(base_response.error('Email not have @address.'));
     }
 
@@ -36,5 +36,5 @@ exports.index = function(req, res, next) {
     mailgun.messages().send(data, function (error, user) {
         console.log(user);
     });
-    return res.json(base_response.success('Send email success'))
+    return res.json(base_response.success('Send email success'));
 };

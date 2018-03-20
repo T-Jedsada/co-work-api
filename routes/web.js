@@ -3,7 +3,6 @@ var router = express.Router();
 var confirm_singup = require('../app/controllers/web/confirm_singup/confirm_singup_controller');
 var verify_singup = require('../app/controllers/web/confirm_singup/verify_controller');
 
-/*  */
 router.get('/', function(req, res, next) {
     res.render('index');
 });

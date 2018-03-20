@@ -1,10 +1,19 @@
 require('dotenv').config();
 var mongojs = require('mongojs');
-var base_response = require('../../../base_controller');
+var base_response = require('../../base_controller');
 var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE_USERS]);
 
 exports.index = function(req, res, next) {
     database.users.find(function(err, users){
+        if(err){
+            res.json(base_response.error('Not have information'));
+        }
+        res.json(base_response.success(users));
+    });
+};
+
+exports.get_provider = function(req, res, next) {
+    database.users.find({role: "provider"},function(err, users){
         if(err){
             res.json(base_response.error('Not have information'));
         }

@@ -2,22 +2,22 @@ module.exports = {
     success: function(data) {
         if(data.constructor === String){
             return {
-                'success': true,
-                'data': {
+                success: true,
+                data: {
                     'message' : data
                 }
             };
         }
         return {
-            'success': true,
-            'data': data
+            success: true,
+            data: data
         };
     },
     error: function (message) {
         return {
-            'success': false,
-            'data': {
-                'error' : message
+            success: false,
+            data: {
+                error : message
             }
         };
     }
