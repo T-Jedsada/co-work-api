@@ -32,8 +32,10 @@ exports.showComment = function (req, res, next) {
 }
 
 exports.judgeMentComment = function (req, res, next) {
-    database.comment.update({ _id: mongojs.ObjectId(req.body.id) }, { $set: { status: "reject" } }, function (err, result) {
-        if (err) {
+    database.comment.update({ _id: mongojs.ObjectId(req.body.id), status: "true" }, { $set: { status: "reject" } }, function (err, result) {
+        console.log(result);
+        //hard handle
+        if (result.n == "0") {
             return res.json(base_response.error('Dude, You cant even do it.'));
         }
         return res.json(base_response.success('Complete ;D'));
