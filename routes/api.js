@@ -31,7 +31,7 @@ router.post('/facebook-login', login_controller.facebook_login);
 router.post('/admin-login', login_controller.admin_login);
 
 /* Api for file image upload */
-router.post('/upload-image', upload_controller.upload);
+router.post('/upload-image', multers.any(), upload_controller.upload);
 
 /* Api for send email */
 router.post('/send-email/confirm-singup', send_confirm_controller.index);
