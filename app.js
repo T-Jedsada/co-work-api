@@ -4,9 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://root:root@ds245228.mlab.com:45228/cowork');
+var cors = require('cors');
 
 var web = require('./routes/web');
 var api = require('./routes/api');
@@ -23,8 +21,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
-app.use('/', web);
+app.use('', web);
 app.use('/api', api);
 
 // catch 404 and forward to error handler
@@ -33,6 +32,7 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
 
 // error handler
 app.use(function(err, req, res, next) {

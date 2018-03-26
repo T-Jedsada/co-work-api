@@ -1,3 +1,6 @@
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/my_database');
+
 var test_model = require('../models/test_model');
 var base_response = require('./base_controller');
 

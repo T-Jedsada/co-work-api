@@ -12,7 +12,6 @@ exports.email_login = function(req, res, next) {
     var password = req.body.password;
 
     if(!email || !password){
-        res.status(400);
         return res.json(base_response.error('The details are not complete.'));
     }
     if (!is_email.validate(email)){
