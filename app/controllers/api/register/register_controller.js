@@ -6,11 +6,11 @@ var base_response = require('../../base_controller');
 var database = mongojs(process.env.CONFIG_DATABASE,[process.env.DB_TABLE_USERS]);
 
 exports.store = function(req, res, next) {
+
     var user_form = req.body;
     var user = {};
 
     if(!user_form.name || !user_form.email || !user_form.password || !user_form.image){
-        res.status(400);
         return res.json(base_response.error('The details are not complete.'));
     }
     if (!is_email.validate(user_form.email)){

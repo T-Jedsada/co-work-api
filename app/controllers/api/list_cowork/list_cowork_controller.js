@@ -4,7 +4,7 @@ var database = mongojs(process.env.CONFIG_DATABASE);
 var base_response = require('../../base_controller');
 
 exports.index = function(req, res, next) {
-    database.coworking.find({},{_id:1 , gellery :1 , name:1 ,rarting:1 ,address :1 , status:1},function(err, result){
+    database.coworking.find({},{_id:1 , gellery :1 , name:1 ,rarting:1 ,address :1 , latitude:1, longitude:1, status:1},function(err, result){
         if(result[0]==null){
            return res.json(base_response.error('Not have information.'));
         }
